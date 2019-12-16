@@ -1,0 +1,60 @@
+import falcon
+import json
+import paho.mqtt.client as m
+import time
+import mysql.connector
+import RPi.GPIO as k
+k.setwarnings(False)
+k.setmode(k.BOARD)
+k.setup(3,OUT)
+k.output(3,0)
+class Testing(object):
+  def on_get(self, req, res):
+    res.status = falcon.HTTP_200
+    res.body = "Namaste"
+  def on_post(self, req, res):
+    res.status = falcon.HTTP_200
+    posted_data = req.stream.read()
+    print(posted_data)
+    b = json.loads(posted_data)
+    try:
+        cnx = mysql.connector.connect(  user='vedam',
+                                        password='vedam#123',
+                                        host='127.0.0.1',
+                                        database='Sensor')
+
+        e = b["Sens_2"]
+        cursor = cnx.cursor()
+
+        address = "18.218.15.131"
+        port=1883
+        instance  = "anythingPub"
+        topic = "sensor"
+        z =str(b)
+        c  = m.Client(instance)
+        c.connect(address,port = port)
+        time.sleep(1)
+        c.publish(topic,z)
+        time.sleep(1)
+        c.disconnect()
+	f =b["STATUS"]
+	if(f == "ON"):
+		k.output(3,1)
+		print("LED ON")
+	elif(f == "OFF")
+		k.output(3,0)
+		print("LED OFF")
+        query = "INSERT INTO `LED3` (`ID`, `STATE`, `TIME`) VALUES (NULL, '" + f + "', CURRENT_TIMESTAMP);"
+
+        cursor.execute(query)
+        cnx.commit()
+    except mysql.connector.Error as e:
+        print(e)
+        print("error");
+    cnx.close()
+    print b["STATUS"]
+
+app = falcon.API()
+app.add_route('/vedam', Testing())
+
+

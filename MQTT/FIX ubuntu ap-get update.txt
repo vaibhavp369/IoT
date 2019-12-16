@@ -1,0 +1,11 @@
+Fix “Unable to lock the administration directory (/var/lib/dpkg/)” in Ubuntu
+
+$ ps -A | grep apt
+
+sudo kill -9 processnumber
+
+sudo rm /var/lib/dpkg/lock
+
+sudo dpkg --configure -a
+
+sudo apt-get update

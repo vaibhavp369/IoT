@@ -1,0 +1,21 @@
+sudo mysql
+show databases;
+use temp_db; //Here tablename is temp_db
+show tables; //shows no of tables present in temp_db
+select * from user; //shows columns present in users table
+select * from user where name like "r%"; // shows name starting from r
+select * from user where name like "%r"; // shows name ending from r
+select distinct `column_name` from `tablename`; //shows distinct values i.e no repeated values are shown
+select max(column_name) from tablename; //shows maximum values in the selected column
+
+//This command is used to create a table
+create table `databaseName`.`tablename` (`id` INT NOT NULL AUTO_INCREMENT , `name` VARCHAR(40) NOT NULL,								`marks` INT NOT NULL, PRIMARY KEY(`id`));
+
+//This command is used to insert a column in a table
+insert into `databaseName`.`tablename`(`id`,`name`,`roll_no`,`marks`) values('5','raj','45,'90');
+
+//This command is used to update a column in a table
+update `tablename` set `marks`='89' where `tablename`.`id`=2;
+
+//This command is used to delete a table
+drop table `databaseName`.`table_name`;

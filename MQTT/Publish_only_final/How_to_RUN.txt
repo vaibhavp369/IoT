@@ -1,0 +1,20 @@
+open two terminal window
+###########################
+in first window run mosquitto using command
+
+mosquitto -v
+if any error occur use command
+sudo service mosquttio stop
+OR
+ps -aux
+kill process i'd
+
+
+############################
+in sedond window
+
+run subcriber file using command 
+
+python filename
+#############################
+

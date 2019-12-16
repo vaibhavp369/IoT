@@ -1,0 +1,37 @@
+sudo apt-get install mosquitto
+sudo apt-get install mosquitto-clients
+sudo pip install paho-mqtt python-etcd
+
+
+##########################################################################
+
+sudo service mosquttio stop
+
+
+##############################################################################
+run the mosquitto
+
+mosquitto -v  #### TO RUN MOSQUTTO
+
+
+it will run in backround 
+if some error is their
+use command 
+
+ps -aux
+cheak the process id
+kill<space>process i'd    ###command to kill process    ##############same is applicable to gunicorn
+##############################################################################
+
+
+###############################################################################
+
+
+HOW TO RUN GUNICORN 
+
+gunicorn<space>file_name:app<space>0.0.0.0:8000   ########### file_name is without extention ##############
+						  ########### port is usually 8000 
+
+
+
+

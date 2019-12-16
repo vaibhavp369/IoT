@@ -1,0 +1,16 @@
+import mysql.connector
+try:
+        cnx = mysql.connector.connect(  user='vedam',
+                                        password='vedam#123',
+                                        host='127.0.0.1',
+                                        database='test')
+        cursor = cnx.cursor()
+        query = "select * from student_marks where name != 'raja' and marks > 60;"
+        cursor.execute(query)
+        for x in cursor:
+                print x
+#                print(id,name,roll_no,m)
+except mysql.connector.Error as e:
+        print(e)
+print("closing connection");
+cnx.close()

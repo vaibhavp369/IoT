@@ -1,0 +1,15 @@
+
+import paho.mqtt.client as m
+import time
+
+address = "127.0.0.1"
+port=1883
+instance  = "anythingPub"
+topic = "akg"
+x = raw_input("Enter message :")
+c  = m.Client(instance)
+c.connect(address,port = port)
+time.sleep(1)
+c.publish(topic,x)
+time.sleep(1)
+c.disconnect()

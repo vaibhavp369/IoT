@@ -1,0 +1,33 @@
+import falcon
+import json
+import mysql.connector
+class Testing(object):
+  def on_get(self, req, res):
+    res.status = falcon.HTTP_200
+    res.body = "Namaste"
+  def on_post(self, req, res):
+    res.status = falcon.HTTP_200
+    posted_data = req.stream.read()
+    print(posted_data)
+    x = json.loads(posted_data)
+    try:
+        cnx = mysql.connector.connect(  user='vedam',
+                                        password='vedam#123',
+                                        host='127.0.0.1',
+                                        database='test')
+        n =str( x["id"])
+        #r = str(x["name"))]
+        m =str(x["marks"])
+        cursor = cnx.cursor()
+        query = " UPDATE `student_marks` SET `marks` = '" + m + "' WHERE `student_marks`.`id` = " + n +";"
+
+        cursor.execute(query)
+        cnx.commit()
+        cursor.close()
+    except mysql.connector.Error as e:
+        print(e)
+        print("error");
+    cnx.close()
+
+app = falcon.API()
+app.add_route('/vedam', Testing())

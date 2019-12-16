@@ -1,0 +1,29 @@
+import falcon
+import mysql.connector
+
+class Testing(object):
+  def on_get(self, req, res,x):
+    res.status = falcon.HTTP_200
+    res.body ="namste from get method"
+  def on_post(self, req, res,x):
+    res.status = falcon.HTTP_200
+    try:
+        cnx = mysql.connector.connect(  user='vedam',
+                                        password='vedam#123',
+                                        host='127.0.0.1',
+                                        database='test')
+        cursor = cnx.cursor()
+        query = "select * from student_marks where id = '" + x + "'; "
+
+        cursor.execute(query)
+        for(id,name,roll,marks) in cursor:
+                        print(id,name,roll,marks)
+                        res.body = "name:"+str(name)+",roll:"+str(roll)+",marks:"+str(marks)
+        cursor.close()
+    except mysql.connector.Error as e:
+        print(e)
+        print("error");
+    cnx.close()
+
+app = falcon.API()
+app.add_route('/{x}', Testing())

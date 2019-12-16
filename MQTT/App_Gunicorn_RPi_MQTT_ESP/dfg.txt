@@ -1,0 +1,5 @@
+z axis 
+1st lyer Blue (0)  b= [:,:,0]
+2nd layer Green(1)
+3rd layer Red(2)
+

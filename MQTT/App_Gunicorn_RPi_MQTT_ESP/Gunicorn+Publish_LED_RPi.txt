@@ -1,0 +1,42 @@
+
+'''
+ HOW TO RUN
+ gunicorn filename:app -b 0.0.0.0:8000  (in new terminal)
+
+'''
+
+
+import falcon
+import json
+import paho.mqtt.client as m
+import time
+import mysql.connector
+
+class Testing(object):
+  def on_get(self, req, res):
+    res.status = falcon.HTTP_200
+    res.body = "Namaste"
+  def on_post(self, req, res):
+    res.status = falcon.HTTP_200
+    posted_data = req.stream.read()
+    print(posted_data)
+    b = json.loads(posted_data)
+    try:
+        address = "127.0.0.1"
+        port=1883
+        instance  = "anythingPub"
+        topic = "LED"
+        c  = m.Client(instance)
+        c.connect(address,port = port)
+        time.sleep(1)
+        p = str(b)
+        c.publish(topic,p)
+        time.sleep(1)
+        c.disconnect()
+    except mysql.connector.Error as e:
+        print(e)
+        print("error");
+#    print("val" ,b["val"])
+app = falcon.API()
+app.add_route('/vedam', Testing())
+

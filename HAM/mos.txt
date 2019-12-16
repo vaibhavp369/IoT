@@ -1,0 +1,4 @@
+RUN mosquitto in backround using 
+"sudo service mosquitto start"
+
+then run the file using gunicorn

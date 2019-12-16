@@ -1,0 +1,18 @@
+import falcon
+import json
+class Testing(object):
+  def on_get(self, req, res):
+    res.status = falcon.HTTP_200
+    res.body = "Namaste"
+  def on_post(self, req, res):
+    res.status = falcon.HTTP_200
+    res.body = "namaste"
+    posted_data = req.stream.read()
+    print(posted_data)
+    x = json.loads(posted_data)
+    print x["name"]
+    print x["roll"]
+    print x["marks"]
+
+app = falcon.API()
+app.add_route('/vedam', Testing())
