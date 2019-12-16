@@ -1,0 +1,19 @@
+import RPi.GPIO as x
+import time
+x.setwarnings(False)
+x.setmode(x.BOARD)
+y= [3,5,7,8,10,11,12]
+
+
+val = [0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x67,0x77,0x7c,0x39,0x5e,0x$
+for i in y:
+        x.setup(i,x.OUT)
+        x.output(i,0)
+
+a= input("Enter pin Numbers :")
+
+a = val[a]
+
+for i in y:
+    r = a%2
+    x.output(i,r)

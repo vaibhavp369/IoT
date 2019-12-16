@@ -1,0 +1,80 @@
+import paho.mqtt.client as mqttClient
+import time
+import RPi.GPIO as x
+
+x.setwarnings(False)
+x.setmode(x.BOARD)
+y=[3,5,7,11]
+for a in y:
+     x.setup(y,x.OUT)
+for b in y:
+    x.output(y,0)
+z=[]
+def store(x=0):
+
+    z.append(x)
+
+def decimalToBinary(number):
+    if number > 1:
+
+         decimalToBinary(number // 2)
+
+    store(number % 2)
+    print(number % 2)
+
+
+
+
+broker_address= "18.218.15.131"  #Broker address
+port = 1883                         #Broker port
+topic1 = "Binary"
+instance = "localSub1"
+print( "topic :",topic1)
+print( "IP:",broker_address)
+print( "Instance:",instance)
+
+def on_connect(client, userdata, flags, rc):
+    if rc == 0:
+        print("Connected to broker")
+        global Connected                #Use global variable
+        Connected = True                #Signal connection
+    else:
+        print("Connection failed")
+
+def on_message(client, userdata, message):
+        msg = message.payload
+        print ("Received Message: "  + msg)
+	for j in range(0,8-len(z)):
+ 	z.insert(0,0)
+ 	j=j+1
+ 	print(z)
+
+	x.output(y[0],z[4])
+	x.output(y[1],z[5])
+	x.output(y[2],z[6])
+	x.output(y[3],z[7])
+	print(z)
+	l=0
+
+
+
+Connected = False   #global variable for the state of the connection
+client = mqttClient.Client(instance)               #create new instance
+
+client.on_connect= on_connect                      #attach function to callback
+client.on_message= on_message                      #attach function to callback
+client.connect(broker_address, port=port)          #connect to broker
+client.loop_start()        #start the loop
+while Connected != True:    #Wait for connection
+    time.sleep(0.1)
+client.subscribe(topic1)
+
+try:
+    while True:
+        time.sleep(1)
+
+except KeyboardInterrupt:
+    print( "exiting")
+    client.disconnect()
+
+

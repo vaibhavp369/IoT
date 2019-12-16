@@ -1,0 +1,113 @@
+###############################################################
+
+Installing mysql server and client :
+
+ 
+
+sudo apt-get update && sudo apt-get upgrade
+sudo apt-get install mysql-server mysql-client
+
+
+###############################################################
+
+Mysql – python
+
+There are 2 ways and 2 versions to install  mysql-python libraries
+
+1st way using apt-get
+
+for python3:
+
+sudo apt-get install python3-mysql.connector
+for python2:
+
+sudo apt-get install python-mysql.connector
+
+
+###############################################################
+
+2nd way using pip:
+
+Install pip and upgrade to the latest version
+
+sudo apt-get install python-pip
+sudo pip install -U pip
+sudo apt-get install python-dev libmysqlclient-dev
+sudo pip install MySQL-python
+
+
+
+###############################################################
+
+Sample code:
+
+For connector with database
+
+import mysql.connector
+try:
+        cnx = mysql.connector.connect(  user='root',
+                                        password='vedam#123',
+                                        host='127.0.0.1',
+                                        database='testdb')
+        print("connection successful");
+except mysql.connector.Error as e:
+        print(error)
+cnx.close()
+
+
+
+
+
+
+###############################################################
+
+selectQuery :
+
+ 
+
+import mysql.connector
+try:
+        cnx = mysql.connector.connect(  user='root',
+                                        password='vedam#123',
+                                        host='127.0.0.1',
+                                        database='testdb')
+        cursor = cnx.cursor()
+        query = "select id, val from testTable;"
+        cursor.execute(query)
+        for (id,val) in cursor:
+                print(id,val)
+except mysql.connector.Error as e:
+        print(e)
+print("closing connection");
+cnx.close()
+
+
+
+###############################################################
+
+insertQuery:
+
+import mysql.connector
+tempValue = 101
+try:
+        cnx = mysql.connector.connect(  user='root',
+                                        password='vedam#123',
+                                        host='127.0.0.1',
+                                        database='testdb')
+        cursor = cnx.cursor()
+        query = "INSERT INTO `testTable`(`val`) VALUES (" + str(tempValue) + ");"
+        cursor.execute(query)
+        cnx.commit()
+        cursor.close()
+except mysql.connector.Error as e:
+        print(e)
+        print("error");
+cnx.close()
+
+
+
+############################################################
+
+
+
+###############################################################

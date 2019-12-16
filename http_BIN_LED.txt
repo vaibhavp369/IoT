@@ -1,0 +1,58 @@
+import falcon
+import RPi.GPIO as x
+import time
+import json
+
+class Testing(object):
+  def on_get(self, req, res):
+    res.status = falcon.HTTP_200
+    res.body ="Enter DEC value"
+  def on_post(self, req, res):
+    res.status = falcon.HTTP_200
+    posted_data = req.stream.read()
+    q=json.loads(posted_data)
+    c=q["key"]
+
+    try:  
+          x.setwarnings(False)
+          x.setmode(x.BOARD)
+          y=[3,5,7,11]
+          for a in y:
+              x.setup(y,x.OUT)
+          for b in y:
+              x.output(y,0)
+
+          z=[]
+          def store(x=0):
+              z.append(x)
+
+
+          def decimalToBinary(number):
+               if number > 1:
+                    decimalToBinary(number // 2)
+
+               store(number % 2)
+               print(number % 2)
+
+
+
+          decimalToBinary(c)
+          j=0
+          for j in range(0,8-len(z)):
+                z.insert(0,0)
+                j=j+1
+                print(z)
+
+          x.output(y[0],z[4])
+          x.output(y[1],z[5])
+          x.output(y[2],z[6])
+          x.output(y[3],z[7])
+          print(z)
+          l=0
+          print(z[4])
+          print(z)
+    except:
+	    print("ERROR")
+app = falcon.API()
+app.add_route('/Binary', Testing())
+

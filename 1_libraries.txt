@@ -1,0 +1,98 @@
+##################################################################
+
+Reload local package database.
+
+sudo apt-get update
+
+
+#################################################################
+
+
+Installing pip
+
+sudo apt install python-pip
+
+
+#################################################################
+
+Installing WSGI Server (Gunicorn)
+
+sudo pip install gunicorn
+
+or
+
+sudo apt-get install gunicron
+
+#################################################################
+
+Installing Falcon
+
+
+sudo pip install falcon
+
+
+#################################################################
+
+Installing Json libraries in python 
+
+sudo pip install ujson
+
+
+#################################################################
+
+sample code to for server
+
+import falcon
+
+import falcon 
+
+class Testing(object):
+  def on_get(self, req, res):
+    res.status = falcon.HTTP_200
+    res.body = "Namaste"
+  def on_post(self, req, res):
+    res.status = falcon.HTTP_200
+    res.body = "namaste"
+    posted_data = req.stream.read()
+    print(posted_data)
+
+app = falcon.API()
+app.add_route('/vedam', Testing())
+
+
+
+
+#################################################################
+
+command to test the above code
+
+gunicorn fileName(without extention):app -b 0.0.0.0:8000
+in above command fileName is the file in which the code is saved considering it is saves in fileName.py and app is name of the object created using  falcon.API() in the code.
+
+to the  check the response you can type below url in your browser
+
+http://IpAddressOfMachine:portnum/vedam
+
+example;
+
+http://192.168.1.10:8000/vedam
+
+
+
+
+#################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#################################################################

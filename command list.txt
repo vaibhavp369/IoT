@@ -1,0 +1,23 @@
+pwd   print my current directory
+ls    list things in current directory
+cd<space>Floder_name ( change directory)
+mkdir<space>Folder_name
+cd<space>..  (goto previous directory)
+touch<space>file_name.extention(optional)  (make file)
+nano<space>file_name  (edit file)
+nano<space>file_name<space>-c  (edit file with show line)
+rm<space>-d<space>file_name  (delete directory)
+ls<space>-l (command line argument)
+(command)<space>--help 
+cp<space>file_name<space>new_filename (copyfile)
+mv<space>file_name<space>../  (movefile)
+OR mv<space>file_name<space>path  (movefile)
+
+
+gcc<space>file_name
+./a.out
+
+
+How to copy  file in bin
+
+sudo<space>cp<space>(path)<space>./

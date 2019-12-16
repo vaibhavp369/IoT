@@ -1,0 +1,100 @@
+###############################################################
+
+Installing Apache and Updating the Firewall
+ 
+
+Install Apache using Ubuntu’s package manager, apt:
+
+sudo apt-get update
+
+
+sudo apt-get install apache2
+
+
+#################################################################
+
+Since this is a sudo command, these operations are executed with root privileges.
+make sure that your firewall allows HTTP and HTTPS traffic.You can check that UFW has an application profile for Apache like so:
+
+
+sudo ufw app list
+
+
+#################################################################
+
+If you look at the Apache Full profile, it should show that it enables traffic to ports 80 and 443:
+
+sudo ufw app info "Apache Full"
+
+#################################################################
+
+Allow incoming HTTP and HTTPS traffic for this profile:
+
+sudo ufw allow in "Apache Full"
+
+#################################################################
+
+Installing MySQL
+Again, use apt to acquire and install this software:
+
+
+sudo apt install mysql-server
+
+
+
+#################################################################
+
+open up the MySQL prompt from your terminal:
+
+sudo mysql
+
+
+#################################################################
+
+In mysql session
+add new user will all privileges. In below command “vedam”  the user name and “vedam#123” is the password. You can change it.
+
+
+
+GRANT ALL PRIVILEGES ON *.* TO 'vedam'@'localhost' IDENTIFIED BY 'vedam#123';
+
+
+#################################################################
+
+flush privileges
+
+
+flush privileges;
+
+#################################################################
+
+To exit from mysql session
+
+exit
+
+#################################################################
+
+Installing PHP
+
+sudo apt install php libapache2-mod-php php-mysql
+
+#################################################################
+
+Installing PHPmyAdmin
+
+
+sudo apt install phpmyadmin php-mbstring php-gettext
+
+
+#################################################################
+
+Then you can check working in your browser by typing
+
+http://ipaddress/phpmyadmin
+
+example:
+
+http://52.90.7.137/phpmyadmin/
+
+
+################################################################

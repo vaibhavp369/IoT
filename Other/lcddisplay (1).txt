@@ -1,0 +1,68 @@
+import RPi.GPIO as x
+import time
+x.setwarnings(False)
+x.setmode(x.BOARD)
+en=15
+rs=16
+y=[3,5,7,8,10,11,12,13]
+#val= 0x80
+x.setup(en,x.OUT)
+x.setup(rs,x.OUT)
+x.output(rs,0)
+x.output(en,0)
+command=[0x30,0x01,0x80,0x0E]
+
+
+
+for i in y:
+    x.setup(i,x.OUT)
+    x.output(i,0)
+
+def binc(k):
+    for a in y:
+        r=k%2
+        x.output(a,r)
+        k=k/2
+
+def cmd(value):
+    x.output(rs,0)
+    time.sleep(0.01)
+    x.output(en,1)
+
+    binc(value)
+
+    time.sleep(0.01)
+    x.output(en,0)
+    time.sleep(0.01)
+    x.output(rs,1)
+
+def data(d_value):
+    x.output(rs,1)
+    time.sleep(0.01)
+    x.output(en,1)
+
+    binc(d_value)
+
+    time.sleep(0.01)
+    x.output(en,0)
+    time.sleep(0.01)
+    x.output(rs,1)
+
+for a in command:
+    cmd(a)
+
+user=input("Enter string: \n")
+for i in user:
+    data(ord(i))
+
+for j in range(0,5):
+    right=[0x1c,0x1c,0x1c,0x1c,0x1c]
+    for g in right:
+        cmd(g)
+        time.sleep(0.5)
+
+    left=[0x18,0x18,0x18,0x18,0x18]
+    for h in left:
+        cmd(h)
+        time.sleep(0.5)
+

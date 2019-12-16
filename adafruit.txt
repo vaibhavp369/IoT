@@ -1,0 +1,22 @@
+io.adafruit create account
+click on IO
+create dashboard
+create new block
+copy key
+go to ifttt
+in myapplets create new applet
+adafruit mqtt lib exanmple simple 82666
+
+##################################################
+
+installing MQTT library
+
+Search MQTT in library in IDE
+
+
+converting int to string 
+
+String <variable_name> = String(Data_or_Variable_name)
+
+
+

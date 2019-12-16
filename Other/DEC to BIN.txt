@@ -1,0 +1,23 @@
+z=[]
+def store(x=0):
+    
+    z.append(x)
+    for i in range(0,8-len(z)):
+        z.insert(0,0)
+    #for i in z:
+        #print(i)
+
+def decimalToBinary(number):
+    if number > 1:
+
+         decimalToBinary(number // 2)
+
+    store(number % 2)
+ 
+number = int(input("Enter the decimal number you want to convert in binary: "))
+
+decimalToBinary(number)
+j=0
+for i in range(0,len(z)):
+    print(j,z[i])
+    j=j+1

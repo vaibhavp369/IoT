@@ -1,0 +1,6 @@
+Topic is subscribed by Rpi so without IP Everyone controling bulb
+
+when someone publish on topic the messege is send all subscribed device
+
+
+ACT1 
