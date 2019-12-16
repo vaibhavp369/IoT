@@ -1,0 +1,93 @@
+/*
+ Author :- VAIBHAV PATIL
+           SIDDHANTH LONDHE
+
+ Abstract:- This source code used to Publish the sensor data using mqtt protocol.
+
+ List of Library used :- 1.ESP8266WiFi        (Used to connect to WiFi network) 
+                         2.PubSubClient       (This library allows to send and receive data using mqtt protocol).
+                         3.Arduino_JSON       (To convert data in JSON format).
+ */
+
+
+#include <ESP8266WiFi.h>
+#include <PubSubClient.h>
+#include <Arduino_JSON.h>
+
+
+const char* ssid = "HR";                    // ssid of wifi network
+const char* password = "123123123";         // password of wifi network
+const char* mqtt_server = "192.168.43.190"; // ip of broker  
+WiFiClient espClient;
+PubSubClient client(espClient);
+
+
+void setup()
+{
+    Serial.begin(9600);         //set boudrate
+    delay(10);
+    WiFi.mode(WIFI_STA);       // wifimode STA (connect to wifi network). Another one is AP(create own AP)
+    WiFi.begin(ssid, password);
+    while (WiFi.status() != WL_CONNECTED) 
+          {
+            delay(500);
+          }
+    client.setServer(mqtt_server, 1883);  // connect to mqtt server
+ }
+
+void loop()
+{
+      if (!client.connected())
+          {
+              reconnect();      
+          }
+      senddata();
+      delay(1000);
+}
+
+/*
+ Funtion Name : - reconnet()
+ USE :- Reconnet the wifi network 
+ Functions Used:- 1. client.connect() = used to connect to the client.
+ */
+
+void reconnect() 
+{
+ while (!client.connected()) 
+  {
+     if(client.connect("ESP8266 Client1"))
+     {
+      Serial.println("connected");
+     }
+     else{
+     Serial.print("failed, rc=");
+     Serial.print(client.state());
+     Serial.println(" try again in 5 seconds");
+     delay(5000);
+     }
+  }
+}  
+/*
+ Funtion Name :- senddata()
+ USE :- PUBLISH the sensor data
+ Function used inside senddata():- 1. random():- used to select random data from given range
+                                   2. JSON.stringify() : - convert the data into JSON format
+                                   3. client.publish() :- used to publish the the JSON data  
+ */
+void senddata()
+{
+ 
+    while(1)
+      {
+        //int k = random(10,1024);
+        int k = analogRead(A0);
+        String m = String(k);
+        Serial.println(k);
+        JSONVar myObject;
+        myObject["name"] = "ESP1_SEN1";
+        myObject["val"] = m;
+        String data = JSON.stringify(myObject);
+         client.publish("akg",data.c_str());
+         delay(3000);
+      }
+}
