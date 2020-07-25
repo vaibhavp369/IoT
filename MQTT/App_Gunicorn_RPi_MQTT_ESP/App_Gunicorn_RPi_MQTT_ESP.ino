@@ -18,8 +18,8 @@
 #include <Wire.h>
 #include <Adafruit_INA219.h>
 char temp[17];
-const char* ssid = "HR";                      
-const char* password = "123123123";                
+const char* ssid = "HR";    // Enter a SSID                  
+const char* password = "123123123";   // Enter SSID password             
 const char* mqtt_server = "192.168.43.190"; // mqtt broker IP
 const byte led = D0; 
 WiFiClient espClient;
