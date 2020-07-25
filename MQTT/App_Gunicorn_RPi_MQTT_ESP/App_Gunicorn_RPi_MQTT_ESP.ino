@@ -3,7 +3,7 @@
  DATE : - 16th JUNE 2019
  TIME COMPLETED :-  8:58 PM
  TIME REQUIRED TO COMPLETE : - 10Hr+
- PERSON HELPED : - VEDAM LABS
+ GUIDENCE : - VEDAM LABS
  Abstract :-  This code is used to control pins using ESP. The input is given through app in Json format to Raspberry pi. The Raspberry pi publish
               data to subscribed ESP and receive its aknowledgement
               Subscribed Topic :- "LED"
